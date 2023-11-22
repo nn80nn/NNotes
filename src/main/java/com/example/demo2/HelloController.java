@@ -3,8 +3,11 @@ package com.example.demo2;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-
+import java.util.Arrays;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONReader;
@@ -57,8 +60,8 @@ public class HelloController {
     private TextArea text;
     @FXML
     private TextField daten;
-
-
+    @FXML
+    private TextArea list;
 
 
     @FXML
@@ -67,7 +70,7 @@ public class HelloController {
         String b = c + ".json";
         File a = new File("NNotes", b);
         boolean b1 = a.exists();
-        if (b1 == false){
+        if (b1 == false) {
             a.createNewFile();
         }
         JSONObject jsonObject = new JSONObject();
@@ -75,14 +78,12 @@ public class HelloController {
         jsonObject.put("NTEXT", text.getText());
         java.util.Date date2 = new java.util.Date();
         jsonObject.put("DATE OF NOTE", date2.toString());
-        //JSONWriter k = new JSONWriter[].;
-        //k.writeObject(jsonObject);
         System.out.println(jsonObject);
         FileWriter writer = new FileWriter(a, false);
-        writer.write(jsonObject.toString());
+        writer.write(jsonObject.toJSONString());
         writer.flush();
         System.out.println(jsonObject.toString());
-        }
+    }
 
     @FXML
     protected void delete_action() throws IOException {
@@ -91,6 +92,7 @@ public class HelloController {
         a.delete();
         clear_action();
     }
+
     @FXML
     protected void clear_action() throws IOException {
         nane.setText("");
@@ -100,6 +102,7 @@ public class HelloController {
         daten.setText(date.toString());
 
     }
+
     @FXML
     protected void open_action() throws IOException {
         FileChooser fc = new FileChooser();
@@ -117,11 +120,34 @@ public class HelloController {
             String line;
             line = reader.readLine();
             System.out.println(line);
-            JSONObject ob = null;
-            ob = JSON.parseObject(line, (Type) Note.class);
-            System.out.println(ob);
+
+            //JSONObject ob = null;
+            //ob = JSON.parseObject(line, (Type) Note.class);
+            //Note ob = JSON.<Note>parseObject(line, Note.class);
+
+            // Парсинг строки JSON в объект
+            JSONObject jsonObject = JSON.parseObject(line);
+
+            // Получение значений полей из объекта
+            String name = jsonObject.getString("NAME");
+            //int age = jsonObject.getIntValue("age");
+            //String city = jsonObject.getString("city");
+            System.out.println(name);
+
         }
 
+    }
+
+    private void lst()
+
+    {
+        File dir = new File("NNotes");
+        ArrayList<String> list4 = new ArrayList<>();
+        for (File item : dir.listFiles()) {
+            System.out.println(item.getName());
+            list.setText(list.getText()+ "\n" + item.getName());
+            list4.add(item.getName() + "\n");
+        }
     }
 
 
@@ -130,6 +156,7 @@ public class HelloController {
         java.util.Date date = new java.util.Date();
         System.out.println(date);
         daten.setText(date.toString());
+        lst();
     }}
 
 

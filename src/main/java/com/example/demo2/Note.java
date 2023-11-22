@@ -1,6 +1,5 @@
 package com.example.demo2;
 
-import java.util.Date;
 
 public class Note {
     @JSONField(name = "NAME")
