@@ -1,21 +1,31 @@
 package com.example.demo2;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONReader;
 import com.alibaba.fastjson.JSONWriter;
 import com.alibaba.fastjson.annotation.JSONCreator;
+import com.alibaba.fastjson.parser.JSONReaderScanner;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import java.io.File;
-
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class HelloController {
@@ -85,12 +95,35 @@ public class HelloController {
     protected void clear_action() throws IOException {
         nane.setText("");
         text.setText("");
+        java.util.Date date = new java.util.Date();
+        System.out.println(date);
+        daten.setText(date.toString());
 
     }
     @FXML
     protected void open_action() throws IOException {
+        FileChooser fc = new FileChooser();
+        Stage stage2 = new Stage();
+        //File selectedFile = fc.showOpenDialog(stage2);
+        fc.setTitle("NNotes");
+        fc.setInitialDirectory(new File("NNotes\\"));
+        //fc.setInitialFileName("myfile.txt");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+        File selectedFile = fc.showOpenDialog(stage2);
+        if (selectedFile != null) {
+            //stage2.show();
+            System.out.println(selectedFile);
+            BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
+            String line;
+            line = reader.readLine();
+            System.out.println(line);
+            JSONObject ob = null;
+            ob = JSON.parseObject(line, (Type) Note.class);
+            System.out.println(ob);
+        }
 
     }
+
 
     @FXML
     void initialize() {
