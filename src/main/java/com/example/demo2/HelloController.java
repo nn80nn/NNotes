@@ -110,6 +110,9 @@ public class HelloController {
             Note objectFromJsonString = parseObject(line, Note.class);
             System.out.println("Object from String: " + objectFromJsonString);
             //Note obj = JSON.parseObject(line.strip(), Note.class);
+            nane.setText(objectFromJsonString.getName());
+            text.setText(objectFromJsonString.getNtext());
+            daten.setText(objectFromJsonString.getDateOfNote());
             System.out.println(objectFromJsonString);
 
             // Получение значений полей из объекта

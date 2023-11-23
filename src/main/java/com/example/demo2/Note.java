@@ -35,7 +35,7 @@ public class Note {
     //@JSONField(name = "dateOfNote")
     private String dateOfNote;
 
-    private Note(){}
+    public Note(){}
 
     public Note(String name, String ntext, String dateOfNote) {
         this.name = name;
