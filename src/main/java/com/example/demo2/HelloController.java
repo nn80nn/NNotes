@@ -1,35 +1,21 @@
 package com.example.demo2;
-//import org.json.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.io.*;
-import java.lang.reflect.Type;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Arrays;
 
-import com.alibaba.fastjson.*;
-import com.alibaba.fastjson.annotation.JSONCreator;
-import com.alibaba.fastjson.parser.JSONReaderScanner;
+import com.alibaba.fastjson.JSONObject;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import static com.alibaba.fastjson.JSON.parseObject;
 
 
 public class HelloController {
@@ -121,17 +107,14 @@ public class HelloController {
             String line = reader.readLine();
             System.out.println(line);
 
-            //String g = new String("{\"DATE OF NOTE\":\"Tue Nov 21 17:05:24 MSK 2023\",\"NTEXT\":\" nkldnnn \",\"NAME\":\"nnds\"}");
-            //JSONObject ob = new JSONObject(JSON.parseObject(line, (Type) Note.class));
-            //Note ob = JSON.parseObject(line, Note.class);
-            Note obj = JSON.parseObject(line.strip(), Note.class);
+            Note objectFromJsonString = parseObject(line, Note.class);
+            System.out.println("Object from String: " + objectFromJsonString);
+            //Note obj = JSON.parseObject(line.strip(), Note.class);
+            System.out.println(objectFromJsonString);
 
-            // Парсинг строки JSON в объект
-            //JSONArray jsonObject = JSON.parseArray(line);
-            //Note jsonArray = (Note) JSON.parse(String.valueOf(line));
-            System.out.println(obj);
             // Получение значений полей из объекта
-            //String name = jsonObject.getString("NAME");
+            //String name = objectFromJsonString.get(0).toString();
+            //System.out.println(name);
             //int age = jsonObject.getIntValue("age");
             //String city = jsonObject.getString("city");
             //System.out.println(name);
