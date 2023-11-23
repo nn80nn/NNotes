@@ -2,17 +2,42 @@ package com.example.demo2;
 
 
 public class Note {
-    @JSONField(name = "NAME")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNtext() {
+        return ntext;
+    }
+
+    public void setNtext(String ntext) {
+        this.ntext = ntext;
+    }
+
+    public String getDateOfNote() {
+        return dateOfNote;
+    }
+
+    public void setDateOfNote(String dateOfNote) {
+        this.dateOfNote = dateOfNote;
+    }
+
+    //@JSONField(name = "name")
     private String name;
 
-    @JSONField(name = "NTEXT")
+    //@JSONField(name = "ntext")
     private String ntext;
 
-    @JSONField(name = "DATE OF NOTE")
+    //@JSONField(name = "dateOfNote")
     private String dateOfNote;
 
+    private Note(){}
+
     public Note(String name, String ntext, String dateOfNote) {
-        super();
         this.name = name;
         this.ntext= ntext;
         this.dateOfNote = dateOfNote;

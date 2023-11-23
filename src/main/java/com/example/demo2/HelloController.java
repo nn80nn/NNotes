@@ -1,5 +1,8 @@
 package com.example.demo2;
-
+//import org.json.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -8,10 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Arrays;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONReader;
-import com.alibaba.fastjson.JSONWriter;
+
+import com.alibaba.fastjson.*;
 import com.alibaba.fastjson.annotation.JSONCreator;
 import com.alibaba.fastjson.parser.JSONReaderScanner;
 import javafx.fxml.FXML;
@@ -74,10 +75,10 @@ public class HelloController {
             a.createNewFile();
         }
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("NAME", c);
-        jsonObject.put("NTEXT", text.getText());
+        jsonObject.put("name", c);
+        jsonObject.put("ntext", text.getText());
         java.util.Date date2 = new java.util.Date();
-        jsonObject.put("DATE OF NOTE", date2.toString());
+        jsonObject.put("dateOfNote", date2.toString());
         System.out.println(jsonObject);
         FileWriter writer = new FileWriter(a, false);
         writer.write(jsonObject.toJSONString());
@@ -117,22 +118,23 @@ public class HelloController {
             //stage2.show();
             System.out.println(selectedFile);
             BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
-            String line;
-            line = reader.readLine();
+            String line = reader.readLine();
             System.out.println(line);
 
-            //JSONObject ob = null;
-            //ob = JSON.parseObject(line, (Type) Note.class);
-            //Note ob = JSON.<Note>parseObject(line, Note.class);
+            //String g = new String("{\"DATE OF NOTE\":\"Tue Nov 21 17:05:24 MSK 2023\",\"NTEXT\":\" nkldnnn \",\"NAME\":\"nnds\"}");
+            //JSONObject ob = new JSONObject(JSON.parseObject(line, (Type) Note.class));
+            //Note ob = JSON.parseObject(line, Note.class);
+            Note obj = JSON.parseObject(line.strip(), Note.class);
 
             // Парсинг строки JSON в объект
-            JSONObject jsonObject = JSON.parseObject(line);
-
+            //JSONArray jsonObject = JSON.parseArray(line);
+            //Note jsonArray = (Note) JSON.parse(String.valueOf(line));
+            System.out.println(obj);
             // Получение значений полей из объекта
-            String name = jsonObject.getString("NAME");
+            //String name = jsonObject.getString("NAME");
             //int age = jsonObject.getIntValue("age");
             //String city = jsonObject.getString("city");
-            System.out.println(name);
+            //System.out.println(name);
 
         }
 
