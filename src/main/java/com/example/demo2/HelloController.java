@@ -70,6 +70,7 @@ public class HelloController {
         writer.write(jsonObject.toJSONString());
         writer.flush();
         System.out.println(jsonObject.toString());
+        lst();
     }
 
     @FXML
@@ -78,6 +79,7 @@ public class HelloController {
         File a = new File("NNotes", b);
         a.delete();
         clear_action();
+        lst();
     }
 
     @FXML
